@@ -1,0 +1,11 @@
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: "CabinetGrotesk-Regular";
+}
+
+.footer__text {
+  font-size: 16px;
+  font-family: "CabinetGrotesk-Regular";
+}

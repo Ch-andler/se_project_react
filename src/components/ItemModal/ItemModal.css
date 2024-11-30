@@ -1,0 +1,26 @@
+.modal__caption {
+  font-family: "CabinetGrotesk-Regular";
+}
+.modal__weather {
+  font-family: "CabinetGrotesk-Regular";
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.modal__content_type_image {
+  border-radius: 16px;
+  padding: 0;
+}
+
+.modal__image {
+  max-width: 100%;
+  max-height: 80%;
+  object-fit: contain;
+  margin: 0 auto;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+.modal__footer {
+  padding-left: 32px;
+  padding-bottom: 32px;
+}

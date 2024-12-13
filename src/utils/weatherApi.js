@@ -10,6 +10,30 @@ export const getWeather = ({ latitude, longitude }, APIkey) => {
   });
 };
 
+export const getItems = () => {
+  return fetch("http://localhost:3001/items").then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(`Error: ${res.status}`);
+    }
+  });
+};
+
+export const deleteItem = (id) => {
+  if (!id) {
+    return Promise.reject("Item ID is required");
+  }
+
+  return fetch(`http://localhost:3001/items/${id}`, {
+    method: "DELETE",
+  }).then((res) => {
+    if (!res.ok) {
+      return Promise.reject(`Error: ${res.status}`);
+    }
+  });
+};
+
 export const filterWeatherData = (data) => {
   const result = {};
   result.city = data.name;

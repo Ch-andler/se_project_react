@@ -1,0 +1,14 @@
+.sidebar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.sidebar__avatar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar__username {
+  margin-right: 116px;
+}

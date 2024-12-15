@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./AddItemModal.css";
 
+import { addItem } from "../../utils/api";
+
 const AddItemModal = ({ isOpen, onSubmit, onClose }) => {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -22,6 +24,7 @@ const AddItemModal = ({ isOpen, onSubmit, onClose }) => {
       setWeather("");
     }
   }, [isOpen]);
+
   return (
     <ModalWithForm
       title="New garment"

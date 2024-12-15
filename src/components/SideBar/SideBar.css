@@ -1,14 +1,16 @@
 .sidebar {
   display: flex;
-  align-items: center;
-  gap: 16px;
 }
+
 .sidebar__avatar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  width: 56px;
+  height: 56px;
+  padding-right: 16px;
 }
 
 .sidebar__username {
-  margin-right: 116px;
+  width: 157px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 116px;
 }

@@ -5,6 +5,7 @@ import "./ClothesSection.css";
 
 function ClothesSection({ items, onCardClick }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [setItems] = useState([]);
 
   const handleAddItemClick = () => {
     setIsModalOpen(true);
@@ -15,8 +16,11 @@ function ClothesSection({ items, onCardClick }) {
   };
 
   const handleAddItem = (newItem) => {
-    console.log("Adding new item:", newItem);
+    setItems((prevItems) => [...prevItems, { ...newItem, id: Date.now() }]); // Add item with a unique id
+    setIsAddModalOpen(false); // Close modal after submission
   };
+
+  const handleOpenModal = () => setIsAddModalOpen(true);
 
   return (
     <section className="clothes-section">

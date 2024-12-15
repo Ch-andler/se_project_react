@@ -13,10 +13,11 @@ import {
 import { coordinates, APIkey } from "../../utils/constants";
 import Footer from "../Footer/Footer.jsx";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
-import { Routes, Route, Router } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
-import { BrowserRouter } from "react-router-dom";
+import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal.jsx"; // Import Confirmation Modal
 
 {
   /* <BrowserRouter basename="/se_project_react">
@@ -31,12 +32,35 @@ function App() {
     city: "",
   });
 
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [items, setItems] = useState([]);
+
+  const handleAddItem = async (newItem) => {
+    try {
+      const addedItem = await addItem(newItem); // Send the item to the API
+      setItems((prevItems) => [...prevItems, addedItem]); // Update state with the API response
+      setIsAddModalOpen(false); // Close modal after success
+    } catch (error) {
+      console.error("Error adding item:", error);
+      alert("Failed to add item. Please try again."); // Show an error message
+    }
+  };
+
+  const handleOpenModal = () => setIsAddModalOpen(true);
+  const handleCloseModal = () => setIsAddModalOpen(false);
+
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
+  const [isModalActive, setIsModalActive] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
 
   const handleCardClick = (card) => {
+    if (!card._id) {
+      console.error("Selected card is missing _id", card);
+      return;
+    }
     setActiveModal("preview");
     setSelectedCard(card);
   };
@@ -58,9 +82,13 @@ function App() {
       .catch(console.error);
   }, []);
 
-  const handleAddItemSubmit = (item) => {
-    const itemWithId = { ...item, _id: item._id || generateUniqueId() };
-    setClothingItems([itemWithId, ...clothingItems]);
+  const handleAddItemSubmit = async (item) => {
+    try {
+      const newItem = await addItem(item);
+      setClothingItems([newItem, ...clothingItems]);
+    } catch (error) {
+      console.error("Failed to add item:", error);
+    }
   };
 
   const generateUniqueId = () => {
@@ -108,6 +136,16 @@ function App() {
     fetchItems();
   }, []);
 
+  const handleShowConfirmationModal = (item) => {
+    setItemToDelete(item); // Set the item to delete
+    setIsModalActive(true); // Show the modal
+  };
+
+  const handleCancelDelete = () => {
+    setIsModalActive(false); // Hide the modal if canceled
+    setItemToDelete(null);
+  };
+
   return (
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
@@ -116,7 +154,7 @@ function App() {
         <div className="page__content">
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
 
-          <Routes basename="/se_project_react">
+          <Routes>
             <Route
               path="/"
               element={
@@ -125,7 +163,6 @@ function App() {
                   handleCardClick={handleCardClick}
                   clothingItems={clothingItems}
                   handleCardDelete={handleCardDelete}
-                  clothingItems={clothingItems}
                 />
               }
             />
@@ -148,13 +185,22 @@ function App() {
           activeModal={activeModal}
           card={selectedCard}
           onClose={closeActiveModal}
+          onDelete={() => handleShowConfirmationModal(item)}
         />
-        <Footer />
+
         <AddItemModal
           onClose={closeActiveModal}
           isOpen={activeModal === "add-garment"}
-          onSubmit={handleAddItemSubmit}
+          onSubmit={handleAddItem}
         />
+        <ConfirmationModal
+          active={isModalActive}
+          itemName={itemToDelete?.name}
+          onConfirm={() => handleDelete(itemToDelete._id)}
+          onCancel={handleCancelDelete}
+        />
+
+        <Footer />
       </div>
     </CurrentTemperatureUnitContext.Provider>
   );

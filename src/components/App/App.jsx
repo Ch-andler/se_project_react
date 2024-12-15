@@ -18,6 +18,7 @@ import { Routes, Route } from "react-router-dom";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal.jsx"; // Import Confirmation Modal
+import { addItem } from "../../utils/api.js";
 
 {
   /* <BrowserRouter basename="/se_project_react">
@@ -39,6 +40,8 @@ function App() {
     try {
       const addedItem = await addItem(newItem); // Send the item to the API
       setItems((prevItems) => [...prevItems, addedItem]); // Update state with the API response
+      const updatedItems = await getItems(); // Assuming fetchItems fetches items from your API
+      setItems(updatedItems); // Update the state with the latest items
       setIsAddModalOpen(false); // Close modal after success
     } catch (error) {
       console.error("Error adding item:", error);
@@ -185,7 +188,8 @@ function App() {
           activeModal={activeModal}
           card={selectedCard}
           onClose={closeActiveModal}
-          onDelete={() => handleShowConfirmationModal(item)}
+          newItem={selectedCard}
+          onDelete={() => handleShowConfirmationModal()}
         />
 
         <AddItemModal
@@ -196,7 +200,7 @@ function App() {
         <ConfirmationModal
           active={isModalActive}
           itemName={itemToDelete?.name}
-          onConfirm={() => handleDelete(itemToDelete._id)}
+          onConfirm={() => handleCardDelete(itemToDelete._id)}
           onCancel={handleCancelDelete}
         />
 

@@ -4,7 +4,7 @@ import { deleteItem } from "../../utils/weatherApi";
 
 import { useEffect, useState } from "react";
 
-function ItemModal({ activeModal, onClose, card = {}, item = {}, onDelete }) {
+function ItemModal({ activeModal, onClose, card = {}, item, onDelete }) {
   const [imageUrl, setImageUrl] = useState(null); // State to store image URL
   const [imageLoaded, setImageLoaded] = useState(false); // State to track image loading
 
@@ -33,6 +33,7 @@ function ItemModal({ activeModal, onClose, card = {}, item = {}, onDelete }) {
     deleteItem(card._id) // Assuming `deleteItem` expects an ID
       .then(() => {
         console.log("Item deleted successfully");
+        onDelete(item);
         onClose();
       })
       .catch((error) => console.error("Error deleting item:", error));

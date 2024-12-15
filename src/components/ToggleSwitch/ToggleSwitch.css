@@ -2,6 +2,7 @@
   display: flex;
   flex: 1;
   position: relative;
+  margin-left: 15px;
 }
 
 .ToggleSwitch__active {

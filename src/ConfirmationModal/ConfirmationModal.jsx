@@ -1,7 +1,13 @@
 import React from "react";
 import "./ConfirmationModal.css"; // Style the modal
 
-function ConfirmationModal({ active, onConfirm, onCancel, itemName }) {
+function ConfirmationModal({
+  active,
+  onConfirm,
+  onCancel,
+  itemName,
+  onDelete,
+}) {
   if (!active) return null;
 
   return (
@@ -9,7 +15,12 @@ function ConfirmationModal({ active, onConfirm, onCancel, itemName }) {
       <div className="confirmation-modal__content">
         <h3>Are you sure you want to delete {itemName}?</h3>
         <div className="confirmation-modal__actions">
-          <button onClick={onConfirm} className="confirmation-modal__confirm">
+          <button
+            onClick={() => {
+              onDelete(card);
+            }}
+            className="confirmation-modal__confirm"
+          >
             Yes, Delete
           </button>
           <button onClick={onCancel} className="confirmation-modal__cancel">

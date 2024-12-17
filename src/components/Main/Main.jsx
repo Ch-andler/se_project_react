@@ -3,7 +3,7 @@ import ItemCard from "../ItemCard/ItemCard";
 import "./Main.css";
 import React, { useContext, useEffect, useState } from "react";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
-import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal";
+/* import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal"; */
 
 function Main({ weatherData, clothingItems, handleCardClick }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
@@ -56,16 +56,16 @@ function Main({ weatherData, clothingItems, handleCardClick }) {
                   key={item._id}
                   item={item}
                   onCardClick={handleCardClick}
-                  onDelete={() => handleShowConfirmationModal(item)}
+                  /* onDelete={() => handleShowConfirmationModal(item)} */
                 />
               ))
           )}
-          <ConfirmationModal
+          {/*  <ConfirmationModal
             active={isModalActive}
             itemName={itemToDelete?.name}
             onConfirm={() => handleDelete(itemToDelete._id)}
             onCancel={handleCancelDelete}
-          />
+          /> */}
         </ul>
       </section>
     </main>

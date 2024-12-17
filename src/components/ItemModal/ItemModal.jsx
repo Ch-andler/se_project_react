@@ -1,12 +1,15 @@
 import React from "react";
 import "./ItemModal.css";
 import { deleteItem } from "../../utils/weatherApi";
+/* import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal"; */
 
 import { useEffect, useState } from "react";
 
 function ItemModal({ activeModal, onClose, card = {}, item, onDelete }) {
   const [imageUrl, setImageUrl] = useState(null); // State to store image URL
   const [imageLoaded, setImageLoaded] = useState(false); // State to track image loading
+  const [isModalActive, setIsModalActive] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
 
   // Fetch or set the image URL when the component mounts or item changes
   useEffect(() => {
@@ -24,19 +27,14 @@ function ItemModal({ activeModal, onClose, card = {}, item, onDelete }) {
   const handleImageError = () => setImageUrl("https://via.placeholder.com/150"); // Fallback image on error
 
   const handleDelete = () => {
-    if (!card || !card._id) {
-      console.log("Item:", item);
+    console.log(item);
+    if (!item || !item._id) {
       console.error("Item is missing _id", item);
       return;
     }
 
-    deleteItem(card._id) // Assuming `deleteItem` expects an ID
-      .then(() => {
-        console.log("Item deleted successfully");
-        onDelete(item);
-        onClose();
-      })
-      .catch((error) => console.error("Error deleting item:", error));
+    onDelete(item);
+    onClose();
   };
 
   return (
@@ -48,8 +46,8 @@ function ItemModal({ activeModal, onClose, card = {}, item, onDelete }) {
           className="modal__close"
         ></button>
         <img
-          src={card?.imageUrl || "https://via.placeholder.com/150"}
-          alt={card?.name}
+          src={item?.imageUrl || "https://via.placeholder.com/150"}
+          alt={item?.name}
           className="modal__image"
           onLoad={handleImageLoad} // Set loading state to true once image is loaded
           onError={handleImageError} // Set fallback image if the image fails to load

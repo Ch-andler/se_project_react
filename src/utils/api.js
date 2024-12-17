@@ -2,6 +2,8 @@ const baseUrl = "http://localhost:3001";
 
 export const getItems = async () => {
   const response = await fetch(`${baseUrl}/items`);
+  const fetchedItems = await getItems();
+  console.log("Fetched items:", fetchedItems); // Log the entire list of items
   if (!response.ok) {
     throw new Error(`Error: ${response.status}`);
   }

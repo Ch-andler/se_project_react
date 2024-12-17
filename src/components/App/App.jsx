@@ -20,12 +20,6 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal.jsx"; // Import Confirmation Modal
 import { addItem } from "../../utils/api.js";
 
-{
-  /* <BrowserRouter basename="/se_project_react">
-  <App />
-</BrowserRouter>; */
-}
-
 function App() {
   const [weatherData, setWeatherData] = useState({
     type: "",
@@ -60,12 +54,13 @@ function App() {
   const [itemToDelete, setItemToDelete] = useState(null);
 
   const handleCardClick = (card) => {
-    if (!card._id) {
+    if (!card || !card._id) {
       console.error("Selected card is missing _id", card);
       return;
     }
     setActiveModal("preview");
     setSelectedCard(card);
+    console.log(card._id);
   };
 
   const handleAddClick = () => {
@@ -89,6 +84,7 @@ function App() {
     try {
       const newItem = await addItem(item);
       setClothingItems([newItem, ...clothingItems]);
+      closeActiveModal(activeModal);
     } catch (error) {
       console.error("Failed to add item:", error);
     }
@@ -109,6 +105,7 @@ function App() {
       setClothingItems((prevItems) =>
         prevItems.filter((item) => item._id !== card._id)
       );
+      console.log(card._id);
       closeActiveModal();
     } catch (error) {
       console.error("Failed to delete item:", error);
@@ -131,6 +128,7 @@ function App() {
       try {
         const items = await getItems();
         setClothingItems(items);
+        console.log(items);
       } catch (error) {
         console.error(error);
       }
@@ -139,7 +137,7 @@ function App() {
     fetchItems();
   }, []);
 
-  const handleShowConfirmationModal = (item) => {
+  /*   const handleShowConfirmationModal = (item) => {
     setItemToDelete(item); // Set the item to delete
     setIsModalActive(true); // Show the modal
   };
@@ -147,7 +145,8 @@ function App() {
   const handleCancelDelete = () => {
     setIsModalActive(false); // Hide the modal if canceled
     setItemToDelete(null);
-  };
+    console.log("Deletion canceled."); // Optional debug log
+  }; */
 
   return (
     <CurrentTemperatureUnitContext.Provider
@@ -184,25 +183,25 @@ function App() {
           </Routes>
         </div>
         <ItemModal
-          handleCardDelete={handleCardDelete}
           activeModal={activeModal}
-          card={selectedCard}
+          item={selectedCard}
           onClose={closeActiveModal}
           newItem={selectedCard}
-          onDelete={() => handleShowConfirmationModal()}
+          onDelete={handleCardDelete}
+          /*  onDelete={() => handleShowConfirmationModal(selectedCard)} // Pass the selected card to the confirmation modal */
         />
 
         <AddItemModal
           onClose={closeActiveModal}
           isOpen={activeModal === "add-garment"}
-          onSubmit={handleAddItem}
+          onSubmit={handleAddItemSubmit}
         />
-        <ConfirmationModal
+        {/*   <ConfirmationModal
           active={isModalActive}
           itemName={itemToDelete?.name}
-          onConfirm={() => handleCardDelete(itemToDelete._id)}
+          onConfirm={() => handleCardDelete(itemToDelete)} // Use itemToDelete for deletion
           onCancel={handleCancelDelete}
-        />
+        /> */}
 
         <Footer />
       </div>

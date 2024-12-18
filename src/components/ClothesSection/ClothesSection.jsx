@@ -1,17 +1,8 @@
 import React from "react";
 import ItemCard from "../ItemCard/ItemCard";
-import AddItemModal from "../AddItemModal/AddItemModal";
 import "./ClothesSection.css";
 
-function ClothesSection({
-  items,
-  onCardClick,
-  isOpen,
-  onClose,
-  handleFormSubmit,
-  onAddButtonClick,
-  handleAddClick,
-}) {
+function ClothesSection({ items, onCardClick, handleAddClick }) {
   return (
     <section className="clothes-section">
       <h2 className="clothes-section__title">Your Items /</h2>
@@ -31,16 +22,6 @@ function ClothesSection({
           />
         ))}
       </ul>
-
-      {isOpen && (
-        <AddItemModal
-          title="New garment"
-          buttonText="Add garment"
-          onClose={onClose}
-          isOpen={isOpen}
-          onSubmit={handleFormSubmit}
-        />
-      )}
     </section>
   );
 }

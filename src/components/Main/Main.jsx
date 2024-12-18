@@ -7,31 +7,6 @@ import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit
 
 function Main({ weatherData, clothingItems, handleCardClick }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-  const [isModalActive, setIsModalActive] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState(null);
-
-  const handleShowConfirmationModal = (item) => {
-    setItemToDelete(item); // Set the item to delete
-    setIsModalActive(true); // Show the modal
-  };
-
-  const handleCancelDelete = () => {
-    setIsModalActive(false); // Hide the modal if canceled
-    setItemToDelete(null);
-  };
-
-  const handleDelete = (itemId) => {
-    deleteItem(itemId)
-      .then(() => {
-        clothingItems((prevItems) =>
-          prevItems.filter((item) => item._id !== itemId)
-        );
-        setIsModalActive(false); // Close the modal after successful delete
-      })
-      .catch((error) => {
-        console.error("Error deleting item:", error);
-      });
-  };
 
   return (
     <main>

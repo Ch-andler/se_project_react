@@ -15,14 +15,6 @@ function Profile({ clothingItems, onCardClick, handleAddClick }) {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <div className="profile">
       <SideBar />

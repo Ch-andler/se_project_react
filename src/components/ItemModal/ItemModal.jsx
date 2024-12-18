@@ -1,6 +1,6 @@
 import React from "react";
 import "./ItemModal.css";
-import { deleteItem } from "../../utils/weatherApi";
+import { deleteItem } from "../../utils/api.js";
 /* import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal"; */
 
 import { useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 function ItemModal({ activeModal, onClose, card = {}, item, onDelete }) {
   const [imageUrl, setImageUrl] = useState(null); // State to store image URL
   const [imageLoaded, setImageLoaded] = useState(false); // State to track image loading
-  const [isModalActive, setIsModalActive] = useState(false);
+  const [isModalActive, setIsModalActive] = useState(false); //Removing this code breaks my site from line 9-27 as per review
   const [itemToDelete, setItemToDelete] = useState(null);
 
   // Fetch or set the image URL when the component mounts or item changes
@@ -34,7 +34,6 @@ function ItemModal({ activeModal, onClose, card = {}, item, onDelete }) {
     }
 
     onDelete(item);
-    onClose();
   };
 
   return (

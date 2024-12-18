@@ -177,6 +177,9 @@ function App() {
                   handleCardClick={handleCardClick}
                   handleCardDelete={handleCardDelete}
                   onAddNewClick={() => setActiveModal("add-garment")}
+                  onSubmit={handleAddItemSubmit}
+                  onClick={handleAddClick}
+                  handleAddClick={handleAddClick}
                 />
               }
             />

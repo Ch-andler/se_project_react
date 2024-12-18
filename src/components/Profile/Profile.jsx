@@ -4,14 +4,22 @@ import ClothesSection from "../ClothesSection/ClothesSection";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./Profile.css";
 
-function Profile({ clothingItems, onCardClick }) {
+function Profile({ clothingItems, onCardClick, handleAddClick }) {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const handleAddItemClick = () => {
     setIsModalOpen(true);
   };
 
+  const handleAddButtonClick = () => {
+    setIsModalOpen(true);
+  };
+
   const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleModalClose = () => {
     setIsModalOpen(false);
   };
 
@@ -22,15 +30,10 @@ function Profile({ clothingItems, onCardClick }) {
         items={clothingItems}
         onAddItemClick={handleAddItemClick}
         onCardClick={onCardClick}
+        onClick={handleAddClick}
+        onAddButtonClick={handleAddButtonClick}
+        handleAddClick={handleAddClick}
       />
-      <ModalWithForm
-        title="Add Item"
-        buttonText="Add"
-        isOpen={isModalOpen}
-        onClose={closeModal}
-      >
-        {}
-      </ModalWithForm>
     </div>
   );
 }

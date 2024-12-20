@@ -26,12 +26,12 @@ export const addItem = async (item) => {
   return response.json();
 };
 
-export const deleteItem = (id) => {
+export const deleteItem = async (id) => {
   if (!id) {
     return Promise.reject("Item ID is required");
   }
 
-  return fetch(`${baseUrl}/items${id}`, {
+  return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
   }).then((res) => {
     if (!res.ok) {

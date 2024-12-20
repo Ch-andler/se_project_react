@@ -42,7 +42,7 @@ function ItemModal({ activeModal, onClose, card = {}, item, onDelete }) {
         <button
           onClick={onClose}
           type="button"
-          className="modal__close"
+          className="modal__close modal__close_white"
         ></button>
         <img
           src={item?.imageUrl || "https://via.placeholder.com/150"}
@@ -52,11 +52,13 @@ function ItemModal({ activeModal, onClose, card = {}, item, onDelete }) {
           onError={handleImageError} // Set fallback image if the image fails to load
         />
         <div className="modal__footer">
-          <h2 className="modal__caption">{card.name}</h2>
-          <p className="modal__weather">Weather: {item?.weather}</p>
+          <h2 className="modal__caption">{item.name}</h2>
           <button className="modal__delete-button" onClick={handleDelete}>
             Delete Item
           </button>
+        </div>
+        <div className="footer__weather">
+          <p className="modal__weather">Weather: {item?.weather}</p>
         </div>
       </div>
     </div>

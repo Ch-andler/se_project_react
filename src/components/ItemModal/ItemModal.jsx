@@ -1,13 +1,12 @@
 import React from "react";
 import "./ItemModal.css";
-import { deleteItem } from "../../utils/api.js";
 /* import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal"; */
 
 import { useEffect, useState } from "react";
 
 function ItemModal({ activeModal, onClose, card = {}, item, onDelete }) {
   const [imageUrl, setImageUrl] = useState(null); // State to store image URL
-  const [setImageLoaded] = useState(false); // State to track image loading
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   // Fetch or set the image URL when the component mounts or item changes
   useEffect(() => {

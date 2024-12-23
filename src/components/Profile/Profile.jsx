@@ -1,7 +1,6 @@
 import React from "react";
 import SideBar from "../SideBar/SideBar";
 import ClothesSection from "../ClothesSection/ClothesSection";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./Profile.css";
 
 function Profile({ clothingItems, onCardClick, handleAddClick }) {

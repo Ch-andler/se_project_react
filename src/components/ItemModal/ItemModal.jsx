@@ -7,9 +7,7 @@ import { useEffect, useState } from "react";
 
 function ItemModal({ activeModal, onClose, card = {}, item, onDelete }) {
   const [imageUrl, setImageUrl] = useState(null); // State to store image URL
-  const [imageLoaded, setImageLoaded] = useState(false); // State to track image loading
-  const [isModalActive, setIsModalActive] = useState(false); //Removing this code breaks my site from line 9-27 as per review
-  const [itemToDelete, setItemToDelete] = useState(null);
+  const [setImageLoaded] = useState(false); // State to track image loading
 
   // Fetch or set the image URL when the component mounts or item changes
   useEffect(() => {

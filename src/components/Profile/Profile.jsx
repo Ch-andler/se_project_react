@@ -5,7 +5,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./Profile.css";
 
 function Profile({ clothingItems, onCardClick, handleAddClick }) {
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [setIsModalOpen] = React.useState(false);
 
   const handleAddItemClick = () => {
     setIsModalOpen(true);

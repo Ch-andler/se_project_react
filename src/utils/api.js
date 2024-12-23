@@ -1,13 +1,14 @@
 const baseUrl = "http://localhost:3001";
 
+function checkResponse(res) {
+  if (res.ok) {
+    return res.json(); // Parse and return JSON if the response is ok.
+  }
+  return res.json().then((error) => Promise.reject(error)); // Parse error details and reject.
+}
+
 export const getItems = () => {
-  return fetch("http://localhost:3001/items").then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-  });
+  return fetch(`${baseUrl}/items`).then(checkResponse);
 };
 
 export const addItem = async (item) => {
@@ -19,11 +20,7 @@ export const addItem = async (item) => {
     body: JSON.stringify(item),
   });
 
-  if (!response.ok) {
-    throw new Error(`Error: ${response.status}`);
-  }
-
-  return response.json();
+  return checkResponse(response);
 };
 
 export const deleteItem = async (id) => {
@@ -33,9 +30,5 @@ export const deleteItem = async (id) => {
 
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
-  }).then((res) => {
-    if (!res.ok) {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-  });
+  }).then(checkResponse);
 };

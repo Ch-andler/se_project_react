@@ -25,6 +25,19 @@
   gap: 12px;
 }
 
+.header__signup-btn {
+  margin-right: 10px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+.header__login-btn {
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
 .header__logo {
   margin-right: 24px;
 }

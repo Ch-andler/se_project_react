@@ -1,12 +1,22 @@
 import React from "react";
 import "./ItemModal.css";
+import { useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 /* import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal"; */
 
 import { useEffect, useState } from "react";
 
-function ItemModal({ activeModal, onClose, card = {}, item, onDelete }) {
+function ItemModal({
+  activeModal,
+  onClose,
+  closeActiveModal,
+  card = {},
+  item,
+  onDelete,
+}) {
   const [imageUrl, setImageUrl] = useState(null); // State to store image URL
   const [imageLoaded, setImageLoaded] = useState(false);
+  const { currentUser } = useContext(CurrentUserContext); // Get logged-in User
 
   // Fetch or set the image URL when the component mounts or item changes
   useEffect(() => {
@@ -21,7 +31,7 @@ function ItemModal({ activeModal, onClose, card = {}, item, onDelete }) {
 
   // Handle image load (optional, for loading indicators)
   const handleImageLoad = () => setImageLoaded(true);
-  const handleImageError = () => setImageUrl("https://via.placeholder.com/150"); // Fallback image on error
+  const handleImageError = () => setImageUrl("https://via.placeholder.com/150");
 
   const handleDelete = () => {
     console.log(item);
@@ -33,29 +43,34 @@ function ItemModal({ activeModal, onClose, card = {}, item, onDelete }) {
     onDelete(item);
   };
 
+  const isOwn = currentUser && card.owner === currentUser?._id;
+
   return (
     <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
       <div className="modal__content modal__content_type_image">
-        <button
-          onClick={onClose}
-          type="button"
-          className="modal__close modal__close_white"
-        ></button>
+        <button onClick={onClose} type="button" className="modal__close">
+          <img
+            src={close}
+            alt="close"
+            className="modal__image modal__image_small_x"
+          />
+        </button>
         <img
-          src={item?.imageUrl || "https://via.placeholder.com/150"}
-          alt={item?.name}
-          className="modal__image"
-          onLoad={handleImageLoad} // Set loading state to true once image is loaded
-          onError={handleImageError} // Set fallback image if the image fails to load
+          src={card.imageUrl}
+          alt="Item Image"
+          className="modal__image__item"
         />
+
         <div className="modal__footer">
-          <h2 className="modal__caption">{item.name}</h2>
-          <button className="modal__delete-button" onClick={handleDelete}>
-            Delete Item
-          </button>
-        </div>
-        <div className="footer__weather">
-          <p className="modal__weather">Weather: {item?.weather}</p>
+          <div className="modal__caption-and-delete_button">
+            <h2 className="modal__caption">{card.name}</h2>
+            {isOwn && ( // Show Delete ONLY if user is the owner of this item
+              <button className="modal__delete_button" onClick={handleDelete}>
+                Delete item
+              </button>
+            )}
+          </div>
+          <p className="modal__weather">Weather: {card.weather}</p>
         </div>
       </div>
     </div>

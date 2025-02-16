@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useState } from "react";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 /* import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal"; */
 
-function Main({ weatherData, clothingItems, handleCardClick }) {
+function Main({ weatherData, clothingItems, handleCardClick, onCardLike }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   return (
@@ -31,6 +31,7 @@ function Main({ weatherData, clothingItems, handleCardClick }) {
                   key={item._id}
                   item={item}
                   onCardClick={handleCardClick}
+                  onCardLike={onCardLike}
                   /* onDelete={() => handleShowConfirmationModal(item)} */
                 />
               ))

@@ -2,3 +2,19 @@
   display: flex;
   gap: 100px;
 }
+
+.profile__edit-button {
+  border: none;
+  cursor: pointer;
+  color: #000000;
+  font-weight: 700;
+  margin-top: 24px;
+}
+
+.profile__signout-button {
+  border: none;
+  cursor: pointer;
+  color: #000000;
+  font-weight: 700;
+  margin-top: 24px;
+}

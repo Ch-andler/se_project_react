@@ -17,3 +17,12 @@
   gap: 20px;
   margin-top: 16px;
 }
+
+.clothes__items {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  gap: 21px;
+  padding: 0;
+  margin: 0;
+}

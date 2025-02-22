@@ -5,6 +5,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 /* import ConfirmationModal from "../../ConfirmationModal/ConfirmationModal"; */
 
 import { useEffect, useState } from "react";
+import close from "../../assets/close-button.svg";
 
 function ItemModal({
   activeModal,
@@ -30,8 +31,8 @@ function ItemModal({
   }, [item]); // Dependency on `item` to re-run when `item` changes
 
   // Handle image load (optional, for loading indicators)
-  const handleImageLoad = () => setImageLoaded(true);
-  const handleImageError = () => setImageUrl("https://via.placeholder.com/150");
+  /* const handleImageLoad = () => setImageLoaded(true);
+  const handleImageError = () => setImageUrl("https://via.placeholder.com/150"); */
 
   const handleDelete = () => {
     console.log(item);
@@ -55,11 +56,7 @@ function ItemModal({
             className="modal__image modal__image_small_x"
           />
         </button>
-        <img
-          src={card.imageUrl}
-          alt="Item Image"
-          className="modal__image__item"
-        />
+        <img src={imageUrl} alt="Item Image" className="modal__image__item" />
 
         <div className="modal__footer">
           <div className="modal__caption-and-delete_button">

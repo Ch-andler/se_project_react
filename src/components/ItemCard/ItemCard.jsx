@@ -1,5 +1,7 @@
 import "./ItemCard.css";
 import React from "react";
+import { useContext, useState, useEffect } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function ItemCard({ item = {}, onCardClick }) {
   const { currentUser } = useContext(CurrentUserContext);

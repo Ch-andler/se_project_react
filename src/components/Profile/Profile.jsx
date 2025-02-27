@@ -7,6 +7,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
 
 function Profile({
+  handleCardClick,
   clothingItems,
   onCardClick,
   handleAddClick,
@@ -21,23 +22,28 @@ function Profile({
   }
   return (
     <div className="profile">
-      <SideBar avatar={currentUser.avatar} name={currentUser.name} />
-      <button
-        onClick={() => setActiveModal("edit-profile")}
-        className="profile__edit-button"
-      >
-        Change profile data
-      </button>
-      <button className="profile__signout-button" onClick={handleLogOut}>
-        Sign Out
-      </button>
-      <ClothesSection
-        clothingItems={clothingItems}
-        onCardClick={onCardClick}
-        onClick={handleAddClick}
-        handleAddClick={handleAddClick}
-        onCardLike={onCardLike}
-      />
+      <div className="profile__container">
+        <SideBar avatar={currentUser.avatar} name={currentUser.name} />
+        <button
+          onClick={() => setActiveModal("edit-profile")}
+          className="profile__edit-button"
+        >
+          Change profile data
+        </button>
+        <button className="profile__signout-button" onClick={handleLogOut}>
+          Sign Out
+        </button>
+      </div>
+
+      <div className="clothing__items-profile">
+        <ClothesSection
+          clothingItems={clothingItems}
+          handleCardClick={handleCardClick}
+          onClick={handleAddClick}
+          handleAddClick={handleAddClick}
+          onCardLike={onCardLike}
+        />
+      </div>
     </div>
   );
 }

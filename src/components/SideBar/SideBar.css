@@ -1,16 +1,19 @@
 .sidebar {
   display: flex;
+  gap: 16px;
+  margin-top: 19px;
 }
 
 .sidebar__avatar {
   width: 56px;
   height: 56px;
-  padding-right: 16px;
+  border-radius: 50%;
 }
 
 .sidebar__username {
-  width: 157px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-right: 116px;
+  margin: 0;
+  margin-top: 18px;
+  white-space: nowrap;
+  max-width: 100%;
+  font-weight: 700;
 }

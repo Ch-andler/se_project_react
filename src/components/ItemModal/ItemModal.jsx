@@ -20,7 +20,7 @@ function ItemModal({
   const { currentUser } = useContext(CurrentUserContext); // Get logged-in User
 
   // Fetch or set the image URL when the component mounts or item changes
-  useEffect(() => {
+  /*  useEffect(() => {
     if (item?.imageUrl) {
       // If item already has an image URL, set it immediately
       setImageUrl(item.imageUrl);
@@ -28,7 +28,7 @@ function ItemModal({
       // If there's no image URL, use a placeholder or handle the case
       setImageUrl("https://via.placeholder.com/150");
     }
-  }, [item]); // Dependency on `item` to re-run when `item` changes
+  }, [item]); */ // Dependency on `item` to re-run when `item` changes
 
   // Handle image load (optional, for loading indicators)
   /* const handleImageLoad = () => setImageLoaded(true);

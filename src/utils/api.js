@@ -23,6 +23,30 @@ export const updateUserProfile = (userData, token) => {
   }).then(handleRequest);
 };
 
+export const handleRequest = (res) => {
+  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+};
+
+export const addCardLike = (id, token) => {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      ...headers,
+      authorization: `Bearer ${token}`,
+    },
+  }).then(handleRequest);
+};
+
+export const removeCardLike = (id, token) => {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      ...headers,
+      authorization: `Bearer ${token}`,
+    },
+  }).then(handleRequest);
+};
+
 export const addItem = async (item, token) => {
   const response = await fetch(`${baseUrl}/items`, {
     method: "POST",

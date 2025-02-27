@@ -11,13 +11,12 @@ import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoutes/ProtectedRoutes";
-
 import Profile from "../Profile/Profile";
+import { addItem, addCardLike, removeCardLike } from "../../utils/api";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
-import { addItem } from "../../utils/api.js";
 import { register, login, checkToken } from "../../utils/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -112,16 +111,14 @@ function App() {
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
     !isLiked
-      ? api
-          .addCardLike(id, token)
+      ? addCardLike(id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard : item))
             );
           })
           .catch((error) => console.log(error))
-      : api
-          .removeCardLike(id, token)
+      : removeCardLike(id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard : item))

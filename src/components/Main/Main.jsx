@@ -22,10 +22,7 @@ function Main({ weatherData, clothingItems, handleCardClick, onCardLike }) {
             <p>No items available.</p>
           ) : (
             clothingItems
-              .filter(
-                (item) =>
-                  item.weather.toLowerCase() === weatherData.type.toLowerCase()
-              )
+              .filter((item) => item.weather === weatherData.type)
               .map((item) => (
                 <ItemCard
                   key={item._id}

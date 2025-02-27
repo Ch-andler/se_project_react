@@ -3,8 +3,9 @@ import React from "react";
 import { useContext, useState, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function ItemCard({ item = {}, onCardClick }) {
+function ItemCard({ item = {}, onCardClick, onCardLike }) {
   const { currentUser } = useContext(CurrentUserContext);
+  console.log("Item imageUrl:", item.imageUrl);
 
   if (!item) {
     return null;
@@ -25,24 +26,27 @@ function ItemCard({ item = {}, onCardClick }) {
 
   return (
     <li className="card">
-      <img
-        onClick={handleCardClick}
-        src={item.imageUrl}
-        alt={item.name}
-        className="card__image"
-      />
-      <div className="card__header">
-        <h2 className="card__title">{item.name}</h2>
-        {currentUser && (
-          <button
-            onClick={handleLike}
-            className={`card__like-button ${
-              isLiked ? "card__like-button_active" : ""
-            }`}
-          ></button>
-        )}
+      <div className="card__image-container">
+        <img
+          className="card__image"
+          src={item.imageUrl}
+          alt={item.name}
+          onClick={handleCardClick}
+        />
+        <div className="card__header">
+          <h2 className="card__name">{item.name}</h2>
+          {currentUser && (
+            <button
+              onClick={handleLike}
+              className={`card__like-button ${
+                isLiked ? "card__like-button_active" : ""
+              }`}
+            ></button>
+          )}
+        </div>
       </div>
     </li>
   );
 }
+
 export default ItemCard;

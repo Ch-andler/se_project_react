@@ -84,30 +84,51 @@ function App() {
     };
   }, [activeModal]);
 
-  const handleAddItemSubmit = (item) => {
+  const handleAddItemSubmit = async (item) => {
     const token = localStorage.getItem("jwt");
-    addItem(item, token)
-      .then((newItem) => {
-        setClothingItems([newItem, ...clothingItems]);
-        closeActiveModal();
-      })
-      .catch((error) => {
-        console.error("Failed to add new item:", error);
+
+    if (!token) {
+      console.error("No token found in localStorage");
+      return;
+    }
+
+    try {
+      // Add the new item using the addItem function
+      const newItem = await addItem(item, token);
+      console.log("New Item added:", newItem); // Log the added item
+
+      // Update state with the new item
+      setClothingItems((prevItems) => {
+        const updatedItems = [newItem, ...prevItems];
+        console.log("Updated Items:", updatedItems); // Log updated items
+        return updatedItems;
       });
+
+      // Close the modal after successful addition
+      closeActiveModal();
+    } catch (error) {
+      console.error("Failed to add new item:", error);
+    }
   };
 
-  const handleDeleteItem = (id) => {
+  const handleDeleteItem = async (id) => {
     const token = localStorage.getItem("jwt");
-    deleteItem(id, token)
-      .then(() => {
-        setClothingItems((prevItems) =>
-          prevItems.filter((item) => item._id !== id)
-        );
-        closeActiveModal();
-      })
-      .catch((error) => {
-        console.error("Failed to delete item:", error);
-      });
+
+    if (!token) {
+      console.error("No token found in localStorage");
+      return;
+    }
+
+    try {
+      // Delete the item and update state in a single function call
+      await deleteItem(id, token);
+      setClothingItems((prevItems) =>
+        prevItems.filter((item) => item._id !== id)
+      );
+      closeActiveModal(); // Close modal after deletion
+    } catch (error) {
+      console.error("Failed to delete item:", error);
+    }
   };
 
   const handleCardLike = ({ id, isLiked }) => {

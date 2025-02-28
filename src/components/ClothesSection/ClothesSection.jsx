@@ -1,17 +1,41 @@
-import React from "react";
+import React, { useContext } from "react";
 import ItemCard from "../ItemCard/ItemCard";
 import "./ClothesSection.css";
-import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function ClothesSection({
-  clothingItems,
+  clothingItems = [],
   handleCardClick,
   handleAddClick,
   onCardLike,
 }) {
-  console.log("clothingItems:", clothingItems); // Check if it's defined and an array
   const { currentUser } = useContext(CurrentUserContext);
+
+  // Debugging: Log the items to inspect the data
+  console.log("clothingItems:", clothingItems);
+  console.log("currentUser:", currentUser);
+
+  // Guard clause to check for currentUser and clothingItems validity
+  if (!currentUser) {
+    return <div>Please log in to view your items.</div>;
+  }
+
+  if (!Array.isArray(clothingItems) || clothingItems.length === 0) {
+    return <div>No clothing items available.</div>;
+  }
+
+  // Filter clothingItems by the current user's id
+  const filteredItems = clothingItems.filter((item) => {
+    // Debugging: Log each item to ensure it has the 'owner' property
+    console.log("Checking item:", item);
+    return item && item.owner && item.owner === currentUser._id;
+  });
+
+  // Check if there are any items after filtering
+  if (filteredItems.length === 0) {
+    return <div>You have no items to display.</div>;
+  }
+
   return (
     <section className="clothes-section">
       <h2 className="clothes-section__title">Your Items</h2>
@@ -23,18 +47,14 @@ function ClothesSection({
         + Add new
       </button>
       <ul className="clothes-section__list">
-        {clothingItems
-          .filter((item) => item.owner === currentUser?._id)
-          .map((item) => {
-            return (
-              <ItemCard
-                key={item._id || item.id}
-                item={item}
-                onCardClick={handleCardClick}
-                onCardLike={onCardLike}
-              />
-            );
-          })}
+        {filteredItems.map((item) => (
+          <ItemCard
+            key={item._id || item.id} // Unique key for each item
+            item={item}
+            onCardClick={handleCardClick}
+            onCardLike={onCardLike}
+          />
+        ))}
       </ul>
     </section>
   );

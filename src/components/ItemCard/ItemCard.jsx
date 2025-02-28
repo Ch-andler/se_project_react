@@ -22,6 +22,7 @@ function ItemCard({ item = {}, onCardClick, onCardLike }) {
   const handleLike = () => {
     onCardLike({ id: item._id, isLiked });
   };
+  console.log(item.imageUrl);
 
   return (
     <li className="card">

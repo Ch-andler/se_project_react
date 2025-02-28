@@ -4,11 +4,20 @@ import "./Main.css";
 import React, { useContext } from "react";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
-function Main({ weatherData, clothingItems, handleCardClick, onCardLike }) {
+function Main({
+  weatherData = {},
+  clothingItems = [],
+  handleCardClick,
+  onCardLike,
+}) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
+  // Debugging: Log the data to check its structure
+  console.log("weatherData:", weatherData);
+  console.log("clothingItems:", clothingItems);
+
   // Guard clauses for weatherData and clothingItems
-  if (!weatherData || !weatherData.type) {
+  if (!weatherData || !weatherData.type || !weatherData.temp) {
     return <p>Loading weather data...</p>;
   }
 
@@ -18,6 +27,7 @@ function Main({ weatherData, clothingItems, handleCardClick, onCardLike }) {
 
   return (
     <main>
+      {/* Pass weatherData to WeatherCard */}
       <WeatherCard weatherData={weatherData} />
 
       <section className="cards">
@@ -26,13 +36,15 @@ function Main({ weatherData, clothingItems, handleCardClick, onCardLike }) {
           {currentTemperatureUnit}
         </p>
         <ul className="cards__list">
+          {/* Check each item and ensure item.weather is a valid value */}
           {clothingItems
-            .filter(
-              (item) => item.weather && item.weather === weatherData?.type
-            ) // Safe check for item.weather
+            .filter((item) => {
+              console.log("Checking item:", item); // Debugging each item
+              return item?.weather && item.weather === weatherData?.type;
+            })
             .map((item) => (
               <ItemCard
-                key={item._id}
+                key={item._id || item.id} // Assuming unique identifier (_id or id)
                 item={item}
                 onCardClick={handleCardClick}
                 onCardLike={onCardLike}

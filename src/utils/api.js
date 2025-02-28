@@ -55,9 +55,7 @@ export const addItem = async (item, token) => {
       authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(item),
-  });
-
-  return checkResponse(response);
+  }).then(handleRequest);
 };
 
 export const deleteItem = async (id, token) => {

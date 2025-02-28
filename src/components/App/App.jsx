@@ -33,6 +33,8 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const openRegisterModal = () => setActiveModal("register");
   const openLoginModal = () => setActiveModal("login");
   const navigate = useNavigate();
@@ -96,7 +98,7 @@ function App() {
 
   const handleDeleteItem = (id) => {
     const token = localStorage.getItem("jwt");
-    deleteClothingItem(id, token)
+    deleteItem(id, token)
       .then(() => {
         setClothingItems((prevItems) =>
           prevItems.filter((item) => item._id !== id)
@@ -249,7 +251,7 @@ function App() {
           <AddItemModal
             closeActiveModal={closeActiveModal}
             isOpen={activeModal === "add-garment"}
-            onSubmit={handleAddItemSubmit}
+            handleAddItemSubmit={handleAddItemSubmit}
           />
           <ItemModal
             activeModal={activeModal}

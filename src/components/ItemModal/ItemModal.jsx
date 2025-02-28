@@ -13,7 +13,7 @@ function ItemModal({
   closeActiveModal,
   card = {},
   item,
-  onDelete,
+  handleDeleteItem,
 }) {
   const [imageUrl, setImageUrl] = useState(null); // State to store image URL
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -33,15 +33,10 @@ function ItemModal({
   // Handle image load (optional, for loading indicators)
   /* const handleImageLoad = () => setImageLoaded(true);
   const handleImageError = () => setImageUrl("https://via.placeholder.com/150"); */
+  /* console.log("Item before delete:", item); */
 
   const handleDelete = () => {
-    console.log(item);
-    if (!item || !item._id) {
-      console.error("Item is missing _id", item);
-      return;
-    }
-
-    onDelete(item);
+    handleDeleteItem(card._id);
   };
 
   const isOwn = currentUser && card.owner === currentUser?._id;

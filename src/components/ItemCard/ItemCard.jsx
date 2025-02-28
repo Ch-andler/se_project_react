@@ -5,7 +5,6 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function ItemCard({ item = {}, onCardClick, onCardLike }) {
   const { currentUser } = useContext(CurrentUserContext);
-  console.log("Item imageUrl:", item.imageUrl);
 
   if (!item) {
     return null;

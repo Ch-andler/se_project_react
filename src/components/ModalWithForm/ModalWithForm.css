@@ -125,3 +125,15 @@
   cursor: pointer;
   font-family: "CabinetGrotesk-Regular";
 }
+.modal__submit_container {
+  padding-top: 32px;
+  padding-bottom: 0;
+}
+.modal__toggle {
+  padding: 8px 16px;
+  color: rgba(0, 0, 0, 0.5);
+  background: none;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}

@@ -12,10 +12,19 @@ const RegisterModal = ({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onRegister(name, avatar, email, password);
-    closeActiveModal();
+
+    try {
+      // Wait for the registration to complete
+      await onRegister(name, avatar, email, password);
+      // If registration is successful, close the modal
+      closeActiveModal();
+    } catch (error) {
+      // Handle errors that occur during registration
+      setErrorMessage("Registration failed. Please try again.");
+      console.error("Registration failed: ", error);
+    }
   };
 
   return (

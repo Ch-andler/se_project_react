@@ -16,13 +16,7 @@ const LoginModal = ({
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
-
-    try {
-      await onLogin(email, password);
-      onClose();
-    } catch (error) {
-      setErrorMessage("Incorrect password");
-    }
+    onLogin(email, password).catch(() => setErrorMessage("Incorrect password"));
   };
 
   return (

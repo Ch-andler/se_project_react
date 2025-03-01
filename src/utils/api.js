@@ -48,14 +48,24 @@ export const removeCardLike = (id, token) => {
 };
 
 export const addItem = async (item, token) => {
-  const response = await fetch(`${baseUrl}/items`, {
-    method: "POST",
-    headers: {
-      ...headers,
-      authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(item),
-  }).then(handleRequest);
+  try {
+    const response = await fetch(`${baseUrl}/items`, {
+      method: "POST",
+      headers: {
+        ...headers,
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(item),
+    });
+
+    const data = await handleRequest(response); // Ensure response is parsed
+    console.log("Full API response:", data); // Debugging
+
+    return data.data; // Extract the actual item
+  } catch (error) {
+    console.error("Error in addItem:", error);
+    return null;
+  }
 };
 
 export const deleteItem = async (id, token) => {

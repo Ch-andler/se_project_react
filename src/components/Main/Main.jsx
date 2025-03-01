@@ -13,8 +13,6 @@ function Main({
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   // Debugging: Log the data to check its structure
-  console.log("weatherData:", weatherData);
-  console.log("clothingItems:", clothingItems);
 
   // Guard clauses for weatherData and clothingItems
   if (!weatherData || !weatherData.type || !weatherData.temp) {
@@ -39,7 +37,6 @@ function Main({
           {/* Check each item and ensure item.weather is a valid value */}
           {clothingItems
             .filter((item) => {
-              console.log("Checking item:", item); // Debugging each item
               return item?.weather && item.weather === weatherData?.type;
             })
             .map((item) => (

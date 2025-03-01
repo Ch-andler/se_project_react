@@ -12,8 +12,6 @@ function ClothesSection({
   const { currentUser } = useContext(CurrentUserContext);
 
   // Debugging: Log the items to inspect the data
-  console.log("clothingItems:", clothingItems);
-  console.log("currentUser:", currentUser);
 
   // Guard clause to check for currentUser and clothingItems validity
   if (!currentUser) {
@@ -27,7 +25,6 @@ function ClothesSection({
   // Filter clothingItems by the current user's id
   const filteredItems = clothingItems.filter((item) => {
     // Debugging: Log each item to ensure it has the 'owner' property
-    console.log("Checking item:", item);
     return item && item.owner && item.owner === currentUser._id;
   });
 

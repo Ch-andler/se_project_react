@@ -87,24 +87,22 @@ function App() {
   const handleAddItemSubmit = async (item) => {
     const token = localStorage.getItem("jwt");
 
-    if (!token) {
-      console.error("No token found in localStorage");
-      return;
-    }
-
     try {
-      // Add the new item using the addItem function
       const newItem = await addItem(item, token);
-      console.log("New Item added:", newItem); // Log the added item
 
-      // Update state with the new item
-      setClothingItems((prevItems) => {
-        const updatedItems = [newItem, ...prevItems];
-        console.log("Updated Items:", updatedItems); // Log updated items
-        return updatedItems;
-      });
+      console.log("New item from API:", newItem); // Debugging
 
-      // Close the modal after successful addition
+      // ✅ Fix: Ensure we are checking for valid properties
+      if (!newItem || !newItem.name) {
+        console.error(
+          "Item creation failed - API returned invalid item:",
+          newItem
+        );
+        return;
+      }
+
+      setClothingItems((prevItems) => [newItem, ...prevItems]);
+
       closeActiveModal();
     } catch (error) {
       console.error("Failed to add new item:", error);
@@ -166,7 +164,6 @@ function App() {
       try {
         const items = await getItems();
         setClothingItems(items);
-        console.log(items);
       } catch (error) {
         console.error(error);
       }
@@ -206,6 +203,7 @@ function App() {
       })
       .then((userData) => {
         setCurrentUser(userData);
+        closeActiveModal();
         return Promise.resolve();
       })
       .catch((error) => {

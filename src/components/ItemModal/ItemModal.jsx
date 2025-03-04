@@ -15,25 +15,18 @@ function ItemModal({
   item,
   handleDeleteItem,
 }) {
-  const [imageUrl, setImageUrl] = useState(null); // State to store image URL
+  const [imageUrl, setImageUrl] = useState(
+    card?.imageUrl || "https://via.placeholder.com/150"
+  );
+
   const [imageLoaded, setImageLoaded] = useState(false);
   const { currentUser } = useContext(CurrentUserContext); // Get logged-in User
 
-  // Fetch or set the image URL when the component mounts or item changes
-  /*  useEffect(() => {
-    if (item?.imageUrl) {
-      // If item already has an image URL, set it immediately
-      setImageUrl(item.imageUrl);
-    } else {
-      // If there's no image URL, use a placeholder or handle the case
-      setImageUrl("https://via.placeholder.com/150");
+  useEffect(() => {
+    if (card?.imageUrl) {
+      setImageUrl(card.imageUrl);
     }
-  }, [item]); */ // Dependency on `item` to re-run when `item` changes
-
-  // Handle image load (optional, for loading indicators)
-  /* const handleImageLoad = () => setImageLoaded(true);
-  const handleImageError = () => setImageUrl("https://via.placeholder.com/150"); */
-  /* console.log("Item before delete:", item); */
+  }, [card]); // Runs whenever `card` changes
 
   const handleDelete = () => {
     handleDeleteItem(card._id);

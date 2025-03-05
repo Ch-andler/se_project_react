@@ -1,13 +1,6 @@
 const baseUrl = "http://localhost:3001";
 const headers = { "Content-Type": "application/json" };
 
-function checkResponse(res) {
-  if (res.ok) {
-    return res.json(); // Parse and return JSON if the response is ok.
-  }
-  return res.json().then((error) => Promise.reject(error)); // Parse error details and reject.
-}
-
 export const getItems = () => {
   return fetch(`${baseUrl}/items`).then(checkResponse);
 };
@@ -20,7 +13,7 @@ export const updateUserProfile = (userData, token) => {
       authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(userData),
-  }).then(handleRequest);
+  }).then(checkResponse);
 };
 
 export const checkResponse = (res) => {
@@ -34,7 +27,7 @@ export const addCardLike = (id, token) => {
       ...headers,
       authorization: `Bearer ${token}`,
     },
-  }).then(handleRequest);
+  }).then(checkResponse);
 };
 
 export const removeCardLike = (id, token) => {
@@ -44,7 +37,7 @@ export const removeCardLike = (id, token) => {
       ...headers,
       authorization: `Bearer ${token}`,
     },
-  }).then(handleRequest);
+  }).then(checkResponse);
 };
 
 export const addItem = async (item, token) => {
@@ -58,7 +51,7 @@ export const addItem = async (item, token) => {
       body: JSON.stringify(item),
     });
 
-    const data = await handleRequest(response); // Ensure response is parsed
+    const data = await checkResponse(response); // Ensure response is parsed
     console.log("Full API response:", data); // Debugging
 
     return data.data; // Extract the actual item

@@ -1,3 +1,5 @@
+import { checkResponse } from "./api";
+
 const BASE_URL = "http://localhost:3001";
 const headers = {
   "Content-Type": "application/json",
@@ -9,7 +11,7 @@ const register = async (name, avatar, email, password) => {
     headers,
     body: JSON.stringify({ name, avatar, email, password }),
   });
-  return handleRequest(res);
+  return checkResponse(res);
 };
 
 const login = async (email, password) => {
@@ -21,7 +23,7 @@ const login = async (email, password) => {
     },
     body: JSON.stringify({ email, password }),
   });
-  return handleRequest(res);
+  return checkResponse(res);
 };
 const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
@@ -30,11 +32,7 @@ const checkToken = (token) => {
       ...headers,
       authorization: `Bearer ${token}`,
     },
-  }).then(handleRequest);
-};
-
-const handleRequest = (res) => {
-  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+  }).then(checkResponse);
 };
 
 export { register, login, checkToken };

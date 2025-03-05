@@ -48,6 +48,8 @@ const LoginModal = ({
         Password
         <input
           type="password"
+          id="password"
+          name="password"
           className="modal__input"
           placeholder="Password"
           value={password}

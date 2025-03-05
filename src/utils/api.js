@@ -23,7 +23,7 @@ export const updateUserProfile = (userData, token) => {
   }).then(handleRequest);
 };
 
-export const handleRequest = (res) => {
+export const checkResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 };
 

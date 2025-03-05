@@ -73,6 +73,8 @@ const RegisterModal = ({
       <label htmlFor="password" className="modal__label">
         Password *
         <input
+          id="password"
+          name="password"
           type="password"
           className="modal__input"
           placeholder="Password"

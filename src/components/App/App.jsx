@@ -257,7 +257,6 @@ function App() {
                     handleCardClick={handleCardClick}
                     setActiveModal={setActiveModal}
                     onCardLike={handleCardLike}
-                    currentUser={currentUser}
                     setIsLoggedIn={setIsLoggedIn}
                     handleLogOut={handleLogOut}
                   />

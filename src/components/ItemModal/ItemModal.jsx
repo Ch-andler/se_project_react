@@ -38,11 +38,7 @@ function ItemModal({
     <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
       <div className="modal__content modal__content_type_image">
         <button onClick={onClose} type="button" className="modal__close">
-          <img
-            src={close}
-            alt="close"
-            className="modal__image modal__image_small_x"
-          />
+          <img src={close} alt="close" />
         </button>
         <img src={imageUrl} alt="Item Image" className="modal__image__item" />
 

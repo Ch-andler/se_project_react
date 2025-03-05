@@ -1,6 +1,7 @@
 .modal__caption {
   font-family: "CabinetGrotesk-Regular";
 }
+
 .modal__weather {
   font-family: "CabinetGrotesk-Regular";
   font-size: 20px;
@@ -20,15 +21,22 @@
 }
 
 .modal__image {
-  max-width: 100%;
-  max-height: 80%;
-  height: 498px;
-  width: 498px;
+  max-height: 498px;
+  max-width: 498px;
   object-fit: contain;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   margin: 0 auto;
   display: visible;
+}
+
+.modal__content {
+  max-width: 498px;
+}
+
+.modal__image__item {
+  max-width: 498px;
+  max-height: 498px;
 }
 .modal__footer {
   padding-left: 32px;
@@ -53,6 +61,4 @@
 
 .modal__delete-button:hover {
   text-decoration: underline;
-}
-.modal__image_item {
 }

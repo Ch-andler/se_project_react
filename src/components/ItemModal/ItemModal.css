@@ -32,11 +32,14 @@
 
 .modal__content {
   max-width: 498px;
+  overflow: hidden;
 }
 
 .modal__image__item {
-  max-width: 498px;
-  max-height: 498px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: contain;
 }
 .modal__footer {
   padding-left: 32px;

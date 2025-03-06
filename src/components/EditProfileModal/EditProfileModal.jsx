@@ -44,6 +44,7 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
       <label htmlFor="name" className="modal__label">
         Name:{" "}
         <input
+          id="name"
           type="text"
           className="modal__input"
           placeholder="Name"
@@ -55,6 +56,7 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
       <label htmlFor="ImageUrl" className="modal__label">
         Avatar URL:{" "}
         <input
+          id="ImageUrl"
           type="Url"
           className="modal__input"
           placeholder="Image URL"

@@ -20,14 +20,13 @@ const AddItemModal = ({ isOpen, closeActiveModal, handleAddItemSubmit }) => {
     }
 
     handleAddItemSubmit(values);
-    resetForm(); // Clear the form after submitting
   }
 
   useEffect(() => {
     if (isOpen) {
       resetForm();
     }
-  }, [isOpen, resetForm]);
+  }, [isOpen]);
 
   return (
     <ModalWithForm

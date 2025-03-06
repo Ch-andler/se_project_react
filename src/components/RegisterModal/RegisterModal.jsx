@@ -40,6 +40,7 @@ const RegisterModal = ({
       <label htmlFor="name" className="modal__label">
         Name *{" "}
         <input
+          id="name"
           type="text"
           className="modal__input"
           placeholder="Name"
@@ -51,6 +52,7 @@ const RegisterModal = ({
       <label htmlFor="imageUrl" className="modal__label">
         Avatar URL *{" "}
         <input
+          id="imageUrl"
           type="url"
           className="modal__input"
           placeholder="Image URL"
@@ -62,6 +64,7 @@ const RegisterModal = ({
       <label htmlFor="email" className="modal__label">
         Email *{" "}
         <input
+          id="email"
           type="email"
           className="modal__input"
           placeholder="Email"
@@ -70,10 +73,10 @@ const RegisterModal = ({
           required
         />
       </label>
-      <label htmlFor="password" className="modal__label">
+      <label htmlFor="regpassword" className="modal__label">
         Password *
         <input
-          id="password"
+          id="regpassword"
           name="password"
           type="password"
           className="modal__input"

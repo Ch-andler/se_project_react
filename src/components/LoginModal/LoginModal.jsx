@@ -29,12 +29,12 @@ const LoginModal = ({
       toggleModal={() => setActiveModal("register")}
       toggleText="or Sign Up"
     >
-      <label htmlFor="email" className="modal__label">
+      <label htmlFor="loginemail" className="modal__label">
         Email{" "}
         <input
           type="email"
           className="modal__input"
-          id="email"
+          id="loginemail"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}

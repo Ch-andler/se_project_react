@@ -41,10 +41,10 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
       onClose={onClose}
       onSubmit={handleSubmit}
     >
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="editname" className="modal__label">
         Name:{" "}
         <input
-          id="name"
+          id="editname"
           type="text"
           className="modal__input"
           placeholder="Name"
@@ -53,10 +53,10 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
           required
         />
       </label>
-      <label htmlFor="ImageUrl" className="modal__label">
+      <label htmlFor="editImageUrl" className="modal__label">
         Avatar URL:{" "}
         <input
-          id="ImageUrl"
+          id="editImageUrl"
           type="Url"
           className="modal__input"
           placeholder="Image URL"

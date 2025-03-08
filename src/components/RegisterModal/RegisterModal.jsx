@@ -37,10 +37,10 @@ const RegisterModal = ({
       toggleModal={() => setActiveModal("login")}
       toggleText="or Log In"
     >
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="regname" className="modal__label">
         Name *{" "}
         <input
-          id="name"
+          id="regname"
           type="text"
           className="modal__input"
           placeholder="Name"
@@ -49,10 +49,10 @@ const RegisterModal = ({
           required
         />
       </label>
-      <label htmlFor="imageUrl" className="modal__label">
+      <label htmlFor="regimageUrl" className="modal__label">
         Avatar URL *{" "}
         <input
-          id="imageUrl"
+          id="regimageUrl"
           type="url"
           className="modal__input"
           placeholder="Image URL"
